@@ -1,0 +1,129 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Password</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #13547a 0%, #80d0c7 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container1 {
+            background: #fff;
+            padding: 32px 28px 24px 28px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(19, 84, 122, 0.15);
+            width: 100%;
+            max-width: 400px;
+        }
+        h3 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #13547a;
+            letter-spacing: 1px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #13547a;
+            font-weight: 500;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 18px;
+            border-radius: 6px;
+            border: 1px solid #b2bec3;
+            background: #f7fafd;
+            font-size: 16px;
+            transition: border 0.2s;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border: 1.5px solid #13547a;
+            outline: none;
+            background: #eaf6fb;
+        }
+        .button1 {
+            text-align: center;
+        }
+        button {
+            background: linear-gradient(90deg, #13547a 0%, #80d0c7 100%);
+            color: #fff;
+            padding: 10px 32px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #0e395a 0%, #5bb3a7 100%);
+        }
+        .forgot-link {
+            display: block;
+            text-align: right;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .forgot-link a {
+            color: #13547a;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .forgot-link a:hover {
+            color: #0e395a;
+            text-decoration: underline;
+        }
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 12px;
+            font-size: 15px;
+        }
+        @media (max-width: 500px) {
+            .container1 {
+                padding: 18px 8px 16px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <h3>Change Password</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="opassword">Old Password</label>
+            <input type="password" id="opassword" name="opassword" placeholder="Enter your old password" required>
+
+            <label for="npassword">New Password</label>
+            <input type="password" id="npassword" name="npassword" placeholder="Password with one special character" required>
+
+            <label for="cnpassword">Confirm New Password</label>
+            <input type="password" id="cnpassword" name="cnpassword" placeholder="Confirm your password" required>
+
+            {# Uncomment below if you want to show forgot password link #}
+            {# <div class="forgot-link"><a href="/forgot-password/">Forgot Password?</a></div> #}
+
+            <div class="button1">
+                <button type="submit">Change Password</button>
+            </div>
+            {% if error_message %}
+                <div class="error-message">{{ error_message }}</div>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>

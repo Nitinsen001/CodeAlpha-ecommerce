@@ -1,0 +1,491 @@
+{% load static %}
+{% include "userheader.html" %}
+{% include "user_nev.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automotive - Code Alpha E-Commerce</title>
+    <link rel="stylesheet" href="{% static 'automotive.css' %}">
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+
+</head>
+<style>
+    body { background: mintcream !important; }
+    .page-header {
+       font-size: 2.5rem;
+       font-weight: 700;
+       text-align: center;
+       margin-bottom: 40px;
+       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       background-clip: text;
+       animation: fadeInUp 0.8s ease-out;
+    }
+    .container {
+        max-width: 1400px;
+        margin: 40px auto 0 auto;
+        padding: 0 10px;
+    }
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        justify-content: center;
+    }
+    .product-card {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 18px rgba(102,126,234,0.10), 0 1.5px 6px rgba(118,75,162,0.08);
+        width: 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 32px 20px 24px 20px;
+        position: relative;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover {
+        transform: translateY(-6px) scale(1.03);
+        box-shadow: 0 8px 32px rgba(102,126,234,0.18), 0 3px 12px rgba(118,75,162,0.12);
+    }
+    .product-badge {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        background: linear-gradient(90deg, #667eea 60%, #764ba2 100%);
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 3px 12px;
+        border-radius: 12px;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+    }
+    .product-card img {
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
+        margin-bottom: 18px;
+        border-radius: 10px;
+        background: #f7f8fa;
+        box-shadow: 0 1px 4px rgba(102,126,234,0.07);
+    }
+    .product-info {
+        width: 100%;
+        text-align: center;
+    }
+    .product-category {
+        font-size: 0.95rem;
+        color: #764ba2;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+    .product-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 4px 0 6px 0;
+        color: #222;
+    }
+    .product-rating {
+        font-size: 1rem;
+        color: #f1c40f;
+        margin-bottom: 6px;
+    }
+    .product-rating .stars {
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+    }
+    .product-price {
+        font-size: 1.22rem;
+        font-weight: 700;
+        color: #667eea;
+        margin-bottom: 12px;
+    }
+    .add-to-cart {
+        background: linear-gradient(90deg, #667eea 60%, #764ba2 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 32px;
+        font-size: 1.08rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+        box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+        margin-top: 4px;
+    }
+    .add-to-cart:hover, .add-to-cart:focus {
+        background: linear-gradient(90deg, #764ba2 60%, #667eea 100%);
+        box-shadow: 0 4px 16px rgba(118,75,162,0.13);
+        transform: translateY(-2px) scale(1.04);
+        outline: none;
+    }
+    @media (max-width: 1100px) {
+        .product-card {
+            width: 38vw;
+            min-width: 260px;
+            max-width: 400px;
+        }
+    }
+    @media (max-width: 900px) {
+        .products {
+            gap: 14px;
+        }
+        .product-card {
+            width: 48vw;
+            min-width: 220px;
+            max-width: 340px;
+        }
+    }
+    @media (max-width: 600px) {
+        .products {
+            flex-direction: column;
+            align-items: center;
+        }
+        .product-card {
+            width: 96vw;
+            min-width: 180px;
+            max-width: 99vw;
+        }
+    }
+</style>
+<body>
+    <!-- Promo Banner -->
+    <div class="promo-banner" role="banner" aria-label="Promotion">
+        🚗 Special Offer: Up to 40% OFF on Automotive Accessories! Free Shipping on Orders Above ₹999 🚚
+    </div>
+
+    <main>
+        <div class="container">
+            <h2 class="page-header" style="color: black; font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: fadeInUp 0.8s ease;">
+                Automotive Accessories
+            </h2>
+            <section class="products" aria-label="Automotive products">
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://www.eurekaforbes.com/cms/assets/prod/GFCDSFVAC_00000_1_b45cb8e962.jpg" alt="Car Vacuum Cleaner" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Vacuum Cleaner</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹1,299</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://jeewanmantra.com/wp-content/uploads/2021/05/0191224_ht-506-crystal-maruti-dzire-2017-3d-custom-pu-leather-car-seat-covers.jpeg" alt="Car Seat Cover" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Seat Cover</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹2,499</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://images-cdn.ubuy.co.in/670998d76ce57475603cb692-ceeniu-smart-car-air-fresheners-new.jpg" alt="Car Air Freshener" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Air Freshener</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹299</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=3 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://static1.industrybuying.com/products/automotive-maintenance-and-accessories/vehicle-tools/tyre-inflators/AUT.TYR.58243525_1678179384355.webp" alt="Car Tyre Inflator" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Tyre Inflator</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹1,999</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=4 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://deodap.in/cdn/shop/files/02_93b4ffa5-7ed5-4af9-a51e-e5bf0b128286.jpg?v=1737628421&width=990" alt="Car Phone Holder" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Phone Holder</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹499</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://m.media-amazon.com/images/I/81m9rJG-0-L.jpg" alt="Car Cleaning Kit" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Cleaning Kit</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹899</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=4 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://m.media-amazon.com/images/I/61sj+ZIXIjL._AC_UF350,350_QL80_.jpg" alt="Car Sun Shade" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Sun Shade</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹399</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=3 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://gomechanic.in/blog/wp-content/uploads/2020/07/Car-Dashcam.jpeg" alt="Car Dashboard Camera" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Dashboard Camera</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹3,499</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=4 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://m.media-amazon.com/images/I/71WjgquDduL._UF1000,1000_QL80_.jpg" alt="Car Jump Starter" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Jump Starter</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹2,999</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=3 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://www.mytrendyphone.eu/images/MT04-Car-Bluetooth-Adapter-FM-Transmitter-HiFi-Music-MP3-Player-Type-C-plus-USB-Car-ChargerNone-25032024-00-p.webp" alt="Car Bluetooth Adapter" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Bluetooth Adapter</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹799</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://images-cdn.ubuy.co.in/67ed8e3aaf9e39d3530dce57-auto-drive-1piece-car-steering-wheel.jpg" alt="Car Steering Wheel Cover" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Steering Wheel Cover</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹599</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://m.media-amazon.com/images/I/71p9FLhJlEL.jpg" alt="Car Emergency Kit" />
+                    <div class="product-info">
+                        <div class="product-category">Automotive</div>
+                        <h3 class="product-title">Car Emergency Kit</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐</span>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">₹1,499</div>
+                        <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    {% include "userfooter.html" %}
+     <script>
+        // Cart functionality
+        let cartCount = 3;
+        
+        function addToCart(button) {
+            const originalText = button.innerHTML;
+            button.innerHTML = '<span class="loading"></span> Adding...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                cartCount++;
+                document.querySelector('.cart-count').textContent = cartCount;
+                button.innerHTML = '✓ Added!';
+                button.style.background = '#2ecc71';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 2000);
+            }, 1500);
+        }
+
+        function navigateToCategory(category) {
+            // Here you would typically navigate to your clothing page with the category filter
+            alert(`Navigating to ${category} category...`);
+            // Example: window.location.href = `clothing.html?category=${category}`;
+        }
+
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.newsletter-input').value;
+            const button = event.target.querySelector('.newsletter-btn');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<span class="loading"></span> Subscribing...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                alert(`Thank you for subscribing with email: ${email}`);
+                button.innerHTML = '✓ Subscribed!';
+                button.style.background = '#2ecc71';
+                event.target.reset();
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 3000);
+            }, 2000);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                header.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-box').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const searchTerm = this.value;
+                if (searchTerm.trim()) {
+                    alert(`Searching for: ${searchTerm}`);
+                    // Here you would implement actual search functionality
+                }
+            }
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.category-card, .product-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

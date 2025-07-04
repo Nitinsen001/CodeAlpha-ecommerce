@@ -1,0 +1,705 @@
+{% load static %}
+{% include "userheader.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing - Code Alpha E-Commerce</title>
+    <link rel="stylesheet" href="{% static 'home_clothing.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'user_nev.css' %}">
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+
+    <script src="{% static 'clothing.js' %}"></script>
+
+
+</head>
+<body>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="/userhome/"><i class="fas fa-home"></i> Home</a>
+                <a href="/home_electronics/"><i class="fas fa-laptop"></i> Electronics</a>
+                <a href="/home_clothing/"><i class="fas fa-tshirt"></i> Fashion</a>
+                
+                <a href="/home_books/"><i class="fas fa-book"></i> Books</a>
+                <a href="/home_games/"><i class="fas fa-gamepad"></i> Gaming</a>
+                <a href="/home_sports/"><i class="fas fa-dumbbell"></i> Sports</a>
+                <a href="/home_automotive/"><i class="fas fa-car"></i> Automotive</a>
+            </div>
+        </div>
+    </nav>
+      <div class="promo-banner">
+            🔥 SPECIAL OFFER: Up to 50% OFF on Clothes! Free Shipping on Orders Above ₹499 🔥
+        </div>
+      <style>
+        .promo-banner {
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 8px;
+            margin: 18px 0 24px 0;
+            box-shadow: 0 2px 10px rgba(255,107,107,0.08);
+            animation: saleBannerSlideDown 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @keyframes saleBannerSlideDown {
+            from { transform: translateY(-40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+      </style>
+    <!-- Hero Carousel -->
+    <section class="hero-carousel">
+        <div class="carousel-slide active">
+            <div class="slide-content">
+                <h2>MEGA SALE</h2>
+                <p>Up to 70% OFF on Electronics</p>
+                <a href="#products" class="cta-btn">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="page-header">
+        <h1>Fashion Collection</h1>
+        <p>Discover the latest trends in clothing and accessories</p>
+    </div>
+    <div class="container">
+        <div class="filter-section">
+            <button class="filter-btn active">All Items</button>
+            <button class="filter-btn">T-Shirts</button>
+            <button class="filter-btn">Jeans</button>
+            <button class="filter-btn">Dresses</button>
+            <button class="filter-btn">Jackets</button>
+            <button class="filter-btn">Shoes</button>
+        </div>
+        <div class="products">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-badge">NEW</div>
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=220&fit=crop" alt="Classic White T-Shirt">
+                <div class="product-info">
+                    <div class="product-category">Men's T-Shirt</div>
+                    <h3 class="product-title">Classic White Tee</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span>(4.5)</span>
+                    </div>
+                    <div class="product-price">$24.99<span class="original-price">$90.99</span></div>
+                    <div class="sizes">
+                        <span>S</span>
+                        <span>M</span>
+                        <span>L</span>
+                        <span>XL</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-badge sale-badge">20% OFF</div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUL1CJ0F9sGjhb3cBZpW4wLmB6-28Oevav_w&s" alt="Denim Jacket">
+                <div class="product-info">
+                    <div class="product-category">Women's Jacket</div>
+                    <h3 class="product-title">Vintage Denim Jacket</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span>(4.2)</span>
+                    </div>
+                    <div class="product-price">$79.99 <span class="original-price">$99.99</span></div>
+                    <div class="sizes">
+                        <span>XS</span>
+                        <span>S</span>
+                        <span>M</span>
+                        <span>L</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="https://image.hm.com/assets/hm/e5/29/e529a515f56d9f12632954548173f86c9c6e5c68.jpg?imwidth=1260" alt="Blue Jeans">
+                <div class="product-info">
+                    <div class="product-category">Men's Jeans</div>
+                    <h3 class="product-title">Slim Fit Blue Jeans</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span>(4.3)</span>
+                    </div>
+                    <div class="product-price">$59.99<span class="original-price">$100.99</span></div>
+                    <div class="sizes">
+                        <span>30</span>
+                        <span>32</span>
+                        <span>34</span>
+                        <span>36</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=3 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&h=220&fit=crop" alt="Summer Dress">
+                <div class="product-info">
+                    <div class="product-category">Women's Dress</div>
+                    <h3 class="product-title">Floral Summer Dress</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span>(4.7)</span>
+                    </div>
+                    <div class="product-price">$45.99<span class="original-price">$109.99</span></div>
+                    <div class="sizes">
+                        <span>XS</span>
+                        <span>S</span>
+                        <span>M</span>
+                        <span>L</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=4 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 5 -->
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/81U6LLlmw1L._AC_UY1100_.jpg" alt="Kids Hoodie">
+                <div class="product-info">
+                    <div class="product-category">Kids' Hoodie</div>
+                    <h3 class="product-title">Cozy Kids Hoodie</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span>(4.4)</span>
+                    </div>
+                    <div class="product-price">$19.99<span class="original-price">$97.90</span></div>
+                    <div class="sizes">
+                        <span>4</span>
+                        <span>6</span>
+                        <span>8</span>
+                        <span>10</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=4 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 6 -->
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXwjPNoxeLtrXxfjdATn2tB4NIGVs5EWViQ&s" alt="Running Shoes">
+                <div class="product-info">
+                    <div class="product-category">Running Shoes</div>
+                    <h3 class="product-title">Lightweight Runners</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span>(4.3)</span>
+                    </div>
+                    <div class="product-price">$50.99<span class="original-price">$90.99</span></div>
+                    <div class="sizes">
+                        <span>6</span>
+                        <span>7</span>
+                        <span>8</span>
+                        <span>9</span>
+                        <span>10</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 7 -->
+            <div class="product-card">
+                <img src="https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/26172540/2023/12/1/f10e7fc2-07ba-4bb9-8738-90a241ba76cd1701428600434UrbanRangerbypantaloonsMenOliveGreenLongSleevesOpenFrontJack2.jpg" alt="Men's Jacket">
+                <div class="product-info">
+                    <div class="product-category">Men's Jacket</div>
+                    <h3 class="product-title">Urban Bomber Jacket</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span>(4.6)</span>
+                    </div>
+                    <div class="product-price">$109.99<span class="original-price">$150.99</span></div>
+                    <div class="sizes">
+                        <span>XS</span>
+                        <span>S</span>
+                        <span>M</span>
+                        <span>L</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 8 -->
+            <div class="product-card">
+                <img src="https://d1pdzcnm6xgxlz.cloudfront.net/bottoms/8905875192862-9.jpg" alt="Women's Jeans">
+                <div class="product-info">
+                    <div class="product-category">Women's Jeans</div>
+                    <h3 class="product-title">High Waist Skinny Jeans</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span>(4.4)</span>
+                    </div>
+                    <div class="product-price">$54.99<span class="original-price">$124.99</span></div>
+                    <div class="sizes">
+                        <span>26</span>
+                        <span>28</span>
+                        <span>30</span>
+                        <span>32</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=4 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 9 -->
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/81tAqI-RhIL._UY1100_.jpg" alt="Men's Polo Shirt">
+                <div class="product-info">
+                    <div class="product-category">Men's Polo</div>
+                    <h3 class="product-title">Casual Polo Shirt</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span>(4.2)</span>
+                    </div>
+                    <div class="product-price">$29.99<span class="original-price">$99.99</span></div>
+                    <div class="sizes">
+                        <span>S</span>
+                        <span>M</span>
+                        <span>L</span>
+                        <span>XL</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 10 -->
+            <div class="product-card">
+                <img src="https://i.pinimg.com/736x/25/e2/c7/25e2c7cfa54a9be2822ebba74b15103c.jpg" alt="Women's Blouse">
+                <div class="product-info">
+                    <div class="product-category">Women's Blouse</div>
+                    <h3 class="product-title">Elegant Silk Blouse</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span>(4.8)</span>
+                    </div>
+                    <div class="product-price">$44.99<span class="original-price">$87.09</span></div>
+                    <div class="sizes">
+                        <span>XS</span>
+                        <span>S</span>
+                        <span>M</span>
+                        <span>L</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 11 -->
+            <div class="product-card">
+                <img src="https://images.meesho.com/images/products/536371357/r3oww_512.webp" alt="Kids Shorts">
+                <div class="product-info">
+                    <div class="product-category">Kids' Shorts</div>
+                    <h3 class="product-title">Summer Play Shorts</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span>(4.1)</span>
+                    </div>
+                    <div class="product-price">$34.99<span class="original-price">$90.99</span></div>
+                    <div class="sizes">
+                        <span>4</span>
+                        <span>6</span>
+                        <span>8</span>
+                        <span>10</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 12 -->
+            <div class="product-card">
+                <img src="https://c.ndtvimg.com/2021-04/1cn7b9qg_skincare650_625x300_14_April_21.jpg?downsize=545:307" alt="Women's Sandals">
+                <div class="product-info">
+                    <div class="product-category">Women's Sandals</div>
+                    <h3 class="product-title">Comfy Summer Sandals</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span>(4.3)</span>
+                    </div>
+                    <div class="product-price">$84.99<span class="original-price">$119.99</span></div>
+                    <div class="sizes">
+                        <span>5</span>
+                        <span>6</span>
+                        <span>7</span>
+                        <span>8</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 13 -->
+            <div class="product-card">
+                <img src="https://www.stickx.de/static/images/product_images/960x1000x95/teejays/5402/5402_Black.jpg" alt="Men's Hoodie">
+                <div class="product-info">
+                    <div class="product-category">Men's Hoodie</div>
+                    <h3 class="product-title">Urban Zip Hoodie</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span>(4.4)</span>
+                    </div>
+                    <div class="product-price">$39.99<span class="original-price">$99.99</span></div>
+                    <div class="sizes">
+                        <span>M</span>
+                        <span>L</span>
+                        <span>XL</span>
+                        <span>S</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=3 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 14 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=300&h=220&fit=crop" alt="Women's Skirt">
+                <div class="product-info">
+                    <div class="product-category">Women's Skirt</div>
+                    <h3 class="product-title">Pleated Midi Skirt</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span>(4.2)</span>
+                    </div>
+                    <div class="product-price">$32.99<span class="original-price">$98.09</span></div>
+                    <div class="sizes">
+                        <span>XS</span>
+                        <span>S</span>
+                        <span>M</span>
+                        <span>L</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=4 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Product 15 -->
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51M3Ih2P8WL._UY1100_.jpg" alt="Kids T-Shirt">
+                <div class="product-info">
+                    <div class="product-category">Kids' T-Shirt</div>
+                    <h3 class="product-title">Fun Graphic Tee</h3>
+                    <div class="product-rating">
+                        <span class="stars">⭐⭐⭐⭐</span>
+                        <span>(4.3)</span>
+                    </div>
+                    <div class="product-price">$29.99<span class="original-price">$79.99</span></div>
+                    <div class="sizes">
+                        <span>4</span>
+                        <span>6</span>
+                        <span>8</span>
+                        <span>10</span>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <style>
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.10);
+            width: 270px;
+            padding: 18px 18px 22px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.3s, transform 0.3s;
+            position: relative;
+        }
+        .product-card:hover {
+            box-shadow: 0 8px 32px rgba(102,126,234,0.18);
+            transform: translateY(-6px) scale(1.03);
+        }
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 14px;
+        }
+        .product-badge, .sale-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #667eea;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 8px;
+            z-index: 2;
+            letter-spacing: 1px;
+        }
+        .sale-badge {
+            background: #e74c3c;
+        }
+        .product-info {
+            width: 100%;
+            text-align: left;
+        }
+        .product-category {
+            color: #764ba2;
+            font-size: 0.92rem;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        .product-title {
+            font-size: 1.18rem;
+            font-weight: 700;
+            margin: 2px 0 8px 0;
+            color: #22223b;
+        }
+        .product-rating {
+            font-size: 0.98rem;
+            margin-bottom: 6px;
+        }
+        .product-rating .stars {
+            color: #f7b731;
+            font-size: 1.05em;
+        }
+        .product-price {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #22223b;
+            margin-bottom: 8px;
+        }
+        .original-price {
+            color: #aaa;
+            font-size: 0.98rem;
+            text-decoration: line-through;
+            margin-left: 6px;
+        }
+        .sizes {
+            margin-bottom: 12px;
+        }
+        .sizes span {
+            display: inline-block;
+            background: #f3f3fa;
+            color: #667eea;
+            border-radius: 6px;
+            padding: 2px 10px;
+            font-size: 0.93rem;
+            font-weight: 500;
+            margin-right: 6px;
+            margin-bottom: 3px;
+            border: 1px solid #e0e0f0;
+            transition: background 0.2s, color 0.2s;
+        }
+        .sizes span:hover {
+            background: #667eea;
+            color: #fff;
+            cursor: pointer;
+        }
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 10px 0;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 6px;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.08);
+            outline: none;
+        }
+        .add-to-cart-btn:hover, .add-to-cart-btn:focus {
+            background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            box-shadow: 0 4px 16px rgba(102,126,234,0.16);
+            transform: translateY(-2px) scale(1.03);
+        }
+        @media (max-width: 900px) {
+            .products {
+                gap: 18px;
+            }
+            .product-card {
+                width: 46vw;
+                min-width: 220px;
+                max-width: 320px;
+            }
+        }
+        @media (max-width: 600px) {
+            .products {
+                flex-direction: column;
+                align-items: center;
+                gap: 14px;
+            }
+            .product-card {
+                width: 95vw;
+                min-width: 0;
+                max-width: 99vw;
+                padding: 12px 8px 16px 8px;
+            }
+        }
+        </style>
+    </div>
+     {% include "userfooter.html" %}
+    
+    <script>
+        // Cart functionality
+        let cartCount = 0;
+        
+        function addToCart(button) {
+            const originalText = button.innerHTML;
+            button.innerHTML = '<span class="loading"></span> Adding...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                cartCount++;
+                document.querySelector('.cart-count').textContent = cartCount;
+                button.innerHTML = '✓ Added!';
+                button.style.background = '#2ecc71';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 2000);
+            }, 1500);
+        }
+
+        function navigateToCategory(category) {
+            // Here you would typically navigate to your clothing page with the category filter
+            alert(`Navigating to ${category} category...`);
+            // Example: window.location.href = `clothing.html?category=${category}`;
+        }
+
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.newsletter-input').value;
+            const button = event.target.querySelector('.newsletter-btn');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<span class="loading"></span> Subscribing...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                alert(`Thank you for subscribing with email: ${email}`);
+                button.innerHTML = '✓ Subscribed!';
+                button.style.background = '#2ecc71';
+                event.target.reset();
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 3000);
+            }, 2000);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                // Only preventDefault for in-page anchors (href="#..." and not just "#" or empty)
+                if (
+                    href &&
+                    href.startsWith('#') &&
+                    href.length > 1 &&
+                    document.querySelector(href) &&
+                    window.location.pathname === this.pathname // Only on same page
+                ) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // For all other hrefs (like /home_electronics/), do NOT preventDefault
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                header.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-box').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const searchTerm = this.value;
+                if (searchTerm.trim()) {
+                    alert(`Searching for: ${searchTerm}`);
+                    // Here you would implement actual search functionality
+                }
+            }
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.category-card, .product-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</html>

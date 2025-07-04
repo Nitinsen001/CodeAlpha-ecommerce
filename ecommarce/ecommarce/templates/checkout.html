@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout - Code Alpha E-Commerce</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+
+
+</head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .checkout-container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+            padding: 2.5rem 2rem;
+        }
+        h2 {
+            text-align: center;
+            color: #764ba2;
+            margin-bottom: 2rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+        }
+        th {
+            background: #667eea;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background: #f3f3f3;
+        }
+        .total-row td {
+            font-weight: bold;
+            color: #2ecc71;
+            border-top: 2px solid #764ba2;
+        }
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: background 0.2s;
+        }
+        .checkout-btn:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+        .empty-cart {
+            text-align: center;
+            color: #888;
+            margin: 2rem 0;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: #667eea;
+            text-decoration: underline;
+        }
+    </style>
+<body>
+    <div class="checkout-container">
+        <h2>Checkout</h2>
+        {% if cart %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for id, item in cart.items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>₹{{ item.price|floatformat:2 }}</td>
+                        <td>₹{{ item.price|floatformat:2|floatformat|floatformat|add:item.quantity|floatformat:2 }}</td>
+                    </tr>
+                {% endfor %}
+                <tr class="total-row">
+                    <td colspan="3" style="text-align:right;">Total:</td>
+                    <td>₹{{ total|floatformat:2 }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <form method="get" action="/fundes/">
+                <button class="checkout-btn" type="submit">Place Order (Demo)</button>
+            </form>
+            <a href="{% url 'view_cart' %}" class="back-link">← Back to Cart</a>
+        {% else %}
+            <div class="empty-cart">
+                Your cart is empty.<br>
+                <a href="/" class="back-link">Go to Home</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

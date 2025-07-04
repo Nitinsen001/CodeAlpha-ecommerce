@@ -1,0 +1,434 @@
+{% load static %}
+{% include "userheader.html" %}
+{% include "user_nev.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gaming - Code Alpha E-Commerce</title>
+    <link rel="stylesheet" href="{% static 'home_games.css' %}">
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+</head>
+<body>
+    <!-- Promo Banner -->
+    <div class="promo-banner" role="banner" aria-label="Promotion">
+        🎮 Special Offer: Up to 30% OFF on Gaming Products! Free Shipping on Orders Above ₹999 🚚
+    </div>
+
+
+    <main>
+        <div class="container">
+            <h2 class="page-header" style="font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); animation: fadeInUp 0.8s ease;">Top Gaming Products</h2>
+            <section class="products" aria-label="Gaming products" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: flex-start;">
+            <!-- Product cards as before -->
+            <!-- ... (no change to product cards) ... -->
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyFprSRzx2W901aJoidZltGvFeNRRkMPFcgg&s" alt="PlayStation 5 Console">
+                <div class="product-info">
+                <div class="product-category">Console</div>
+                <h3 class="product-title">PlayStation 5 Console</h3>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>(4.9)</span>
+                </div>
+                <div class="product-price">₹49,999</div>
+                <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="https://images-cdn.ubuy.co.in/67e1836c5bac4e4bab01b069-microsoft-xbox-series-x-halo-infinite.jpg" alt="Xbox Series X">
+                <div class="product-info">
+                <div class="product-category">Console</div>
+                <h3 class="product-title">Xbox Series X</h3>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>(4.8)</span>
+                </div>
+                <div class="product-price">₹47,999</div>
+                <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.5/c_scale,w_400/ncom/en_US/articles/2025/nintendo-switch-2-to-be-released-in-2025/1920x1080_WN_PR01162025" alt="Nintendo Switch">
+                <div class="product-info">
+                <div class="product-category">Console</div>
+                <h3 class="product-title">Nintendo Switch</h3>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐</span>
+                    <span>(4.7)</span>
+                </div>
+                <div class="product-price">₹29,999</div>
+                <form method="post" action="{% url 'add_to_cart' product_id=3 %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAazdn_LciyCKmbiLfs2FpyCIWk7tcFfy6SA&s" alt="Logitech G502 Gaming Mouse">
+                <div class="product-info">
+                <div class="product-category">Accessory</div>
+                <h3 class="product-title">Logitech G502 Gaming Mouse</h3>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>(4.8)</span>
+                </div>
+                <div class="product-price">₹4,499</div>
+                <form method="post" action="{% url 'add_to_cart' product_id=4 %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+                </div>
+            </div>
+            <!-- Product 5 -->
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/61HLJYXFLjL.jpg" alt="Razer BlackWidow Keyboard">
+                <div class="product-info">
+                <div class="product-category">Accessory</div>
+                <h3 class="product-title">Razer BlackWidow Keyboard</h3>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐</span>
+                    <span>(4.6)</span>
+                </div>
+                <div class="product-price">₹8,999</div>
+                <form method="post" action="{% url 'add_to_cart' product_id=5 %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+                </div>
+            </div>
+            <!-- Product 6 -->
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/71ltsViEA8L._UF1000,1000_QL80_.jpg" alt="HyperX Cloud II Headset">
+                <div class="product-info">
+                <div class="product-category">Headset</div>
+                <h3 class="product-title">HyperX Cloud II Headset</h3>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>(4.8)</span>
+                </div>
+                <div class="product-price">₹6,499</div>
+                <form method="post" action="{% url 'add_to_cart' product_id=6 %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+                </div>
+            </div>
+            <!-- Product 7 -->
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/51NMkkGi-xL._UF894,1000_QL80_.jpg" alt="Gaming Chair">
+                <div class="product-info">
+                <div class="product-category">Chair</div>
+                <h3 class="product-title">Ergonomic Gaming Chair</h3>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐</span>
+                    <span>(4.5)</span>
+                </div>
+                <div class="product-price">₹14,999</div>
+                <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+                </div>
+            </div>
+            <!-- Product 8 -->
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtsZsLq6Mug60IJtr8Kawt127qUqUwqkSrqw&s" alt="Elgato Stream Deck">
+                <div class="product-info">
+                <div class="product-category">Accessory</div>
+                <h3 class="product-title">Elgato Stream Deck</h3>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>(4.7)</span>
+                </div>
+                <div class="product-price">₹12,499</div>
+                <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+                </div>
+            </div>
+            <!-- Product 9 -->
+            <div class="product-card">
+                <img src="https://images.samsung.com/is/image/samsung/p6pim/africa_en/ls32ag550euxen/gallery/africa-en-odyssey-g5-g55a-ls32ag550euxen-532391730?$684_547_PNG$" alt="Gaming Monitor 27 inch">
+                <div class="product-info">
+                <div class="product-category">Monitor</div>
+                <h3 class="product-title">27" Gaming Monitor 165Hz</h3>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐</span>
+                    <span>(4.6)</span>
+                </div>
+                <div class="product-price">₹19,999</div>
+                <form method="post" action="{% url 'add_to_cart' product_id=5 %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+                </div>
+            </div>
+            <!-- Product 10 -->
+            <div class="product-card">
+                <img src="https://assets.xboxservices.com/assets/1c/e7/1ce760ed-d588-4976-baa9-cbabe583436b.jpg?n=111101_Gallery-0_29_1350x759.jpg" alt="Gaming Controller">
+                <div class="product-info">
+                <div class="product-category">Controller</div>
+                <h3 class="product-title">Xbox Wireless Controller</h3>
+                <div class="product-rating">
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                    <span>(4.8)</span>
+                </div>
+                <div class="product-price">₹4,299</div>
+                <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+                </div>
+            </div>
+            </section>
+        </div>
+
+        <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem 1.2rem; /* vertical gap 2rem, horizontal gap 1.2rem */
+            justify-content: flex-start;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(102, 126, 234, 0.13), 0 1.5px 4px rgba(0,0,0,0.06);
+            overflow: hidden;
+            width: 260px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 1.5rem;
+        }
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.18), 0 2px 8px rgba(0,0,0,0.09);
+        }
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #f4f4f4;
+        }
+        .product-info {
+            padding: 1.2rem 1rem 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .product-category {
+            font-size: 0.95rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        .product-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 0;
+            color: #22223b;
+        }
+        .product-rating {
+            font-size: 1rem;
+            color: #f7b731;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .product-rating .stars {
+            font-size: 1.1rem;
+        }
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #764ba2;
+            margin: 0.4rem 0 0.7rem 0;
+        }
+        .add-to-cart {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 0.7rem;
+            padding: 0.7rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.10);
+        }
+        .add-to-cart:hover, .add-to-cart:focus {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.18);
+        }
+        @media (max-width: 1200px) {
+            .container {
+            max-width: 1000px;
+            }
+            .products {
+            gap: 1.5rem 1rem;
+            }
+        }
+        @media (max-width: 900px) {
+            .container {
+            max-width: 98vw;
+            }
+            .products {
+            gap: 1.2rem 0.7rem;
+            }
+            .product-card {
+            width: 44vw;
+            min-width: 200px;
+            max-width: 320px;
+            }
+        }
+        @media (max-width: 600px) {
+            .container {
+            padding: 0 0.3rem;
+            }
+            .products {
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem 0;
+            }
+            .product-card {
+            width: 95vw;
+            min-width: 180px;
+            max-width: 99vw;
+            }
+        }
+        </style>
+    </main>
+{% include "userfooter.html" %}
+    
+    <script>
+        // Cart functionality
+        let cartCount = 3;
+        
+        function addToCart(button) {
+            const originalText = button.innerHTML;
+            button.innerHTML = '<span class="loading"></span> Adding...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                cartCount++;
+                document.querySelector('.cart-count').textContent = cartCount;
+                button.innerHTML = '✓ Added!';
+                button.style.background = '#2ecc71';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 2000);
+            }, 1500);
+        }
+
+        function navigateToCategory(category) {
+            // Here you would typically navigate to your clothing page with the category filter
+            alert(`Navigating to ${category} category...`);
+            // Example: window.location.href = `clothing.html?category=${category}`;
+        }
+
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.newsletter-input').value;
+            const button = event.target.querySelector('.newsletter-btn');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<span class="loading"></span> Subscribing...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                alert(`Thank you for subscribing with email: ${email}`);
+                button.innerHTML = '✓ Subscribed!';
+                button.style.background = '#2ecc71';
+                event.target.reset();
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 3000);
+            }, 2000);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                header.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-box').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const searchTerm = this.value;
+                if (searchTerm.trim()) {
+                    alert(`Searching for: ${searchTerm}`);
+                    // Here you would implement actual search functionality
+                }
+            }
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.category-card, .product-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .message-box {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            text-align: center;
+            max-width: 600px;
+        }
+        .message-box h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .message-box p {
+            font-size: 16px;
+            color: #ddd;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .back-button {
+            background-color: #ffffff;
+            color: #0072ff;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #0072ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="message-box">
+        <h2>Search Results</h2>
+        <p>
+            Sorry! No products are currently being displayed because this project was built specifically for internship and demonstration purposes within a limited time frame.<br><br>
+            Due to upcoming exams and tight deadlines, I focused primarily on the front-end design and basic functionality instead of adding dynamic product management using databases.<br><br>
+            The search feature has been implemented correctly, but since products are being displayed directly through static HTML rather than being stored in a database, the search cannot retrieve any results.<br><br>
+            This feature can be easily extended in the future to work with a proper database when time and requirements allow.
+        </p>
+        <a href="{% url 'home' %}" class="back-button">Back to Home</a>
+    </div>
+
+</body>
+</html>

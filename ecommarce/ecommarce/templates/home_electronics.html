@@ -1,0 +1,648 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Electronics - Code Alpha E-Commerce</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}" />
+    <link rel="stylesheet" href="{% static 'electronics.css' %}" />
+    <script src="{% static 'electronics.js' %}"></script>
+    <style>
+      body {
+        background: mintcream !important;
+      }
+      .logo {
+        font-size: 28px;
+        font-weight: 800;
+        background: white;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
+    {% include "userheader.html" %} {% include "user_nev.html" %}
+
+    <!-- Container -->
+    <div class="container">
+      <!-- Promo Banner -->
+      <div class="promo-banner">
+        🔥 SPECIAL OFFER: Up to 50% OFF on Electronics! Free Shipping on Orders
+        Above ₹999 🔥
+      </div>
+
+      <!-- Page Title -->
+      <div
+        class="page-title"
+        style="background: inherit; padding: 24px 0; text-align: center"
+      >
+        <h2
+          style="
+            color: #fff;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease;
+          "
+        >
+          Premium Electronics Collection
+        </h2>
+        <p
+          style="
+            color: #fff;
+            text-shadow: 1px 1px 4px #333, 0 1px 0 #bbb, 0 2px 0 #aaa;
+            font-size: 1.2rem;
+            margin: 0;
+          "
+        >
+          Latest gadgets and technology at unbeatable prices
+        </p>
+      </div>
+      <style>
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .products {
+          display: grid !important;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2.5rem 2rem;
+          margin-bottom: 2rem;
+        }
+        @media (max-width: 900px) {
+          .products {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 600px) {
+          .products {
+            grid-template-columns: 1fr;
+          }
+        }
+        .product-card {
+          background: #fff;
+          border-radius: 16px;
+          box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+          padding: 1.2rem;
+          transition: box-shadow 0.2s;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .product-card:not(:last-child) {
+          margin-bottom: 0;
+        }
+        /* Button CSS */
+        .add-to-cart {
+          background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          padding: 0.7rem 1.6rem;
+          font-size: 1rem;
+          font-weight: 600;
+          cursor: pointer;
+          box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+          transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+          margin-top: 1rem;
+          outline: none;
+          letter-spacing: 0.5px;
+          position: relative;
+          overflow: hidden;
+        }
+        .add-to-cart:hover,
+        .add-to-cart:focus {
+          background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+          transform: translateY(-2px) scale(1.04);
+          box-shadow: 0 4px 16px rgba(102, 126, 234, 0.15);
+        }
+        .add-to-cart:active {
+          background: #667eea;
+          transform: scale(0.98);
+        }
+        .add-to-cart[disabled] {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+        .add-to-cart .loading {
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          border: 2px solid #fff;
+          border-top: 2px solid #764ba2;
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+          margin-right: 8px;
+          vertical-align: middle;
+        }
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      </style>
+
+      <!-- Filter Section -->
+      <div class="filter-section">
+        <div class="filter-controls">
+          <div class="filter-group">
+            <label>Category</label>
+            <select id="categoryFilter" onchange="filterProducts()">
+              <option value="all">All Categories</option>
+              <option value="smartphones">Smartphones</option>
+              <option value="laptops">Laptops</option>
+              <option value="tablets">Tablets</option>
+              <option value="headphones">Headphones</option>
+              <option value="cameras">Cameras</option>
+              <option value="gaming">Gaming</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Price Range</label>
+            <select id="priceFilter" onchange="filterProducts()">
+              <option value="all">All Prices</option>
+              <option value="0-500">₹0 - ₹500</option>
+              <option value="500-1000">₹500 - ₹1,000</option>
+              <option value="1000-5000">₹1,000 - ₹5,000</option>
+              <option value="5000+">₹5,000+</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Sort By</label>
+            <select id="sortFilter" onchange="filterProducts()">
+              <option value="featured">Featured</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+              <option value="newest">Newest First</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products" id="productsGrid">
+        <!-- iPhone 15 Pro -->
+        <div
+          class="product-card"
+          data-category="smartphones"
+          data-price="79999"
+          data-rating="4.8"
+          data-date="2024-05-01"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&h=250&fit=crop"
+            alt="iPhone 15 Pro"
+          />
+          <div class="product-info">
+            <div class="product-category">Smartphones</div>
+            <h3 class="product-title">iPhone 15 Pro</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.8)</span>
+            </div>
+            <div class="product-price">₹79,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=1 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <!-- MacBook Pro M3 -->
+        <div
+          class="product-card"
+          data-category="laptops"
+          data-price="129999"
+          data-rating="4.9"
+          data-date="2024-04-15"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=300&h=250&fit=crop"
+            alt="MacBook Pro M3"
+          />
+          <div class="product-info">
+            <div class="product-category">Laptops</div>
+            <h3 class="product-title">MacBook Pro M3</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.9)</span>
+            </div>
+            <div class="product-price">₹129,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <!-- iPad Air -->
+        <div
+          class="product-card"
+          data-category="tablets"
+          data-price="54999"
+          data-rating="4.7"
+          data-date="2024-03-20"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQie6nr9H1IFnj6yN1xzWczTfN8pL0cVvt91w&s"
+            alt="iPad Air"
+          />
+          <div class="product-info">
+            <div class="product-category">Tablets</div>
+            <h3 class="product-title">iPad Air</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.7)</span>
+            </div>
+            <div class="product-price">₹54,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=3 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <!-- Sony WH-1000XM5 -->
+        <div
+          class="product-card"
+          data-category="headphones"
+          data-price="24999"
+          data-rating="4.6"
+          data-date="2024-02-10"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEKzwlvTMIu8AKBuBnXaJ7m2Q_UitiYzfJBw&s"
+            alt="Sony WH-1000XM5"
+          />
+          <div class="product-info">
+            <div class="product-category">Headphones</div>
+            <h3 class="product-title">Sony WH-1000XM5</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.6)</span>
+            </div>
+            <div class="product-price">₹24,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=4 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <!-- Canon EOS R6 -->
+        <div
+          class="product-card"
+          data-category="cameras"
+          data-price="189999"
+          data-rating="4.8"
+          data-date="2024-01-05"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=300&h=250&fit=crop"
+            alt="Canon EOS R6"
+          />
+          <div class="product-info">
+            <div class="product-category">Cameras</div>
+            <h3 class="product-title">Canon EOS R6</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.8)</span>
+            </div>
+            <div class="product-price">₹189,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=5 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <!-- PlayStation 5 -->
+        <div
+          class="product-card"
+          data-category="gaming"
+          data-price="49999"
+          data-rating="4.9"
+          data-date="2023-12-01"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&h=250&fit=crop"
+            alt="PlayStation 5"
+          />
+          <div class="product-info">
+            <div class="product-category">Gaming</div>
+            <h3 class="product-title">PlayStation 5</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.9)</span>
+            </div>
+            <div class="product-price">₹49,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=6 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <!-- Samsung Galaxy S24 -->
+        <div
+          class="product-card"
+          data-category="smartphones"
+          data-price="69999"
+          data-rating="4.5"
+          data-date="2024-04-01"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=300&h=250&fit=crop"
+            alt="Samsung Galaxy S24"
+          />
+          <div class="product-info">
+            <div class="product-category">Smartphones</div>
+            <h3 class="product-title">Samsung Galaxy S24</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.5)</span>
+            </div>
+            <div class="product-price">₹69,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <!-- Dell XPS 13 -->
+        <div
+          class="product-card"
+          data-category="laptops"
+          data-price="89999"
+          data-rating="4.4"
+          data-date="2023-11-01"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=300&h=250&fit=crop"
+            alt="Dell XPS 13"
+          />
+          <div class="product-info">
+            <div class="product-category">Laptops</div>
+            <h3 class="product-title">Dell XPS 13</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.4)</span>
+            </div>
+            <div class="product-price">₹89,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=2 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <!-- AirPods Pro -->
+        <div
+          class="product-card"
+          data-category="headphones"
+          data-price="19999"
+          data-rating="4.7"
+          data-date="2024-03-01"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=300&h=250&fit=crop"
+            alt="AirPods Pro"
+          />
+          <div class="product-info">
+            <div class="product-category">Headphones</div>
+            <h3 class="product-title">AirPods Pro</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.7)</span>
+            </div>
+            <div class="product-price">₹19,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=9 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <!-- Xiaomi Mi 13 -->
+        <div
+          class="product-card"
+          data-category="smartphones"
+          data-price="54999"
+          data-rating="4.3"
+          data-date="2023-10-01"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&h=250&fit=crop"
+            alt="Xiaomi Mi 13"
+          />
+          <div class="product-info">
+            <div class="product-category">Smartphones</div>
+            <h3 class="product-title">Xiaomi Mi 13</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.3)</span>
+            </div>
+            <div class="product-price">₹54,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=10 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <!-- HP Pavilion Gaming -->
+        <div
+          class="product-card"
+          data-category="laptops"
+          data-price="65999"
+          data-rating="4.2"
+          data-date="2023-09-01"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=300&h=250&fit=crop"
+            alt="HP Pavilion Gaming"
+          />
+          <div class="product-info">
+            <div class="product-category">Laptops</div>
+            <h3 class="product-title">HP Pavilion Gaming</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.2)</span>
+            </div>
+            <div class="product-price">₹65,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=11 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+        <!-- Nintendo Switch -->
+        <div
+          class="product-card"
+          data-category="gaming"
+          data-price="29999"
+          data-rating="4.6"
+          data-date="2023-08-01"
+        >
+          <div class="product-badge">NEW</div>
+          <img
+            src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&h=250&fit=crop"
+            alt="Nintendo Switch"
+          />
+          <div class="product-info">
+            <div class="product-category">Gaming</div>
+            <h3 class="product-title">Nintendo Switch</h3>
+            <div class="product-rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span>(4.6)</span>
+            </div>
+            <div class="product-price">₹29,999</div>
+            <form method="post" action="{% url 'add_to_cart' product_id=12 %}">
+              {% csrf_token %}
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    {% include "userfooter.html" %}
+
+    <script>
+      // Cart functionality
+      let cartCount = 3;
+
+      function addToCart(button) {
+        const originalText = button.innerHTML;
+        button.innerHTML = '<span class="loading"></span> Adding...';
+        button.disabled = true;
+
+        setTimeout(() => {
+          cartCount++;
+          document.querySelector(".cart-count").textContent = cartCount;
+          button.innerHTML = "✓ Added!";
+          button.style.background = "#2ecc71";
+
+          setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.background = "";
+            button.disabled = false;
+          }, 2000);
+        }, 1500);
+      }
+
+      function navigateToCategory(category) {
+        // Here you would typically navigate to your clothing page with the category filter
+        alert(`Navigating to ${category} category...`);
+        // Example: window.location.href = `clothing.html?category=${category}`;
+      }
+
+      function subscribeNewsletter(event) {
+        event.preventDefault();
+        const email = event.target.querySelector(".newsletter-input").value;
+        const button = event.target.querySelector(".newsletter-btn");
+        const originalText = button.innerHTML;
+
+        button.innerHTML = '<span class="loading"></span> Subscribing...';
+        button.disabled = true;
+
+        setTimeout(() => {
+          alert(`Thank you for subscribing with email: ${email}`);
+          button.innerHTML = "✓ Subscribed!";
+          button.style.background = "#2ecc71";
+          event.target.reset();
+
+          setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.background = "";
+            button.disabled = false;
+          }, 3000);
+        }, 2000);
+      }
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add scroll effect to header
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector(".header");
+        if (window.scrollY > 100) {
+          header.style.background = "rgba(102, 126, 234, 0.95)";
+          header.style.backdropFilter = "blur(20px)";
+        } else {
+          header.style.background =
+            "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+          header.style.backdropFilter = "blur(10px)";
+        }
+      });
+
+      // Search functionality
+      document
+        .querySelector(".search-box")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            const searchTerm = this.value;
+            if (searchTerm.trim()) {
+              alert(`Searching for: ${searchTerm}`);
+              // Here you would implement actual search functionality
+            }
+          }
+        });
+
+      // Add intersection observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for animation
+      document
+        .querySelectorAll(".category-card, .product-card")
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(20px)";
+          el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+          observer.observe(el);
+        });
+    </script>
+  </body>
+</html>

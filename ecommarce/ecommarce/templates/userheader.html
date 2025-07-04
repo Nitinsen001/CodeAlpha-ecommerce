@@ -1,0 +1,48 @@
+{% load static %}
+<html>
+    <head>
+    <link rel="stylesheet" href="{% static 'userhome.css' %}">
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    </head>
+
+<body>
+  {% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'userhome.css' %}">
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>  <!-- for icons -->
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="logo">CodeAlpha</a>
+            
+            <!-- ✅ Modified Search Bar -->
+            <div class="search-container">
+                <form method="get" action="/search/">
+                    <input type="text" name="q" class="search-bar" placeholder="Search for products, brands and more..." required>
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <a href="/profile/" class="action-btn">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+                
+                <a href="/cart/" class="action-btn">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                    <span class="cart-badge">0</span>
+                </a>
+                <a href="/login/" class="action-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </header>
+</body>
+</html>

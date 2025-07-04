@@ -1,0 +1,580 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automotive - Code Alpha E-Commerce</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-menu a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #ffd700;
+            transition: width 0.3s ease;
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .search-box {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .cart-icon {
+            position: relative;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .cart-icon:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .hero {
+            height: 60vh;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), url('https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=1200&h=800&fit=crop') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            color: #333;
+        }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #ffed4a, #ffd700);
+        }
+        .btn-secondary:hover {
+            background: white;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff4757;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        .product-info {
+            padding: 1.5rem;
+        }
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        .add-to-cart {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .add-to-cart:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transform: scale(1.02);
+        }
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 40px;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+        .footer-section ul {
+            list-style: none;
+        }
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        .footer-section ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-section ul li a:hover {
+            color: #ffd700;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+        }
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .logo { font-size: 24px; }
+            .nav-container { padding: 0 1rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .product-grid { grid-template-columns: 1fr; }
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">Code Alpha</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="/home/">Home</a></li>
+                    <li><a href="/electronics/">Electronics</a></li>
+                    <li><a href="/clothing/">Clothing</a></li>
+                    <li><a href="/automotive/">Automotive</a></li>
+                    <li><a href="/accesories/">Accesories</a></li>
+                    <li><a href="/books/">Books</a></li>
+                    <li><a href="/login/">Sign In</a></li>
+                    <li><a href="/register/">Sign UP</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                
+                <a href="/login/"><div class="cart-icon">
+                    🛒
+                    <span class="cart-count">0</span>
+                </div></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to Automotive Store</h1>
+            <p>Discover the best automotive accessories and essentials</p>
+            <div class="cta-buttons">
+                <a href="#products" class="btn btn-primary">Shop Automotive</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Automotive Products Section -->
+    <section class="featured-products" id="products">
+        <div class="container">
+            <h2 class="section-title">Featured Automotive</h2>
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <img src="https://www.eurekaforbes.com/cms/assets/prod/GFCDSFVAC_00000_1_b45cb8e962.jpg" alt="Car Vacuum Cleaner">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Vacuum Cleaner</h3>
+                        <div class="product-price">₹1,299<span class="original-price">₹2,000</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <img src="https://jeewanmantra.com/wp-content/uploads/2021/05/0191224_ht-506-crystal-maruti-dzire-2017-3d-custom-pu-leather-car-seat-covers.jpeg" alt="Car Seat Cover">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Seat Cover</h3>
+                        <div class="product-price">₹2,499<span class="original-price">₹4,000</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <img src="https://images-cdn.ubuy.co.in/670998d76ce57475603cb692-ceeniu-smart-car-air-fresheners-new.jpg" alt="Car Air Freshener">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Air Freshener</h3>
+                        <div class="product-price">₹299<span class="original-price">₹500</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <img src="https://static1.industrybuying.com/products/automotive-maintenance-and-accessories/vehicle-tools/tyre-inflators/AUT.TYR.58243525_1678179384355.webp" alt="Car Tyre Inflator">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Tyre Inflator</h3>
+                        <div class="product-price">₹1,999<span class="original-price">₹3,999</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <img src="https://deodap.in/cdn/shop/files/02_93b4ffa5-7ed5-4af9-a51e-e5bf0b128286.jpg?v=1737628421&width=990" alt="Car Phone Holder">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Phone Holder</h3>
+                        <div class="product-price">₹499<span class="original-price">₹999</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/81m9rJG-0-L.jpg" alt="Car Cleaning Kit">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Cleaning Kit</h3>
+                        <div class="product-price">₹899<span class="original-price">₹1,000</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=400&q=80" alt="Car Sun Shade">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Sun Shade</h3>
+                        <div class="product-price">₹399<span class="original-price">₹899</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <img src="https://gomechanic.in/blog/wp-content/uploads/2020/07/Car-Dashcam.jpeg" alt="Car Dashboard Camera">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Dashboard Camera</h3>
+                        <div class="product-price">₹3,499<span class="original-price">₹8,999</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+                <!-- Product 9 -->
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/71WjgquDduL._UF1000,1000_QL80_.jpg" alt="Car Jump Starter">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Jump Starter</h3>
+                        <div class="product-price">₹2,999<span class="original-price">₹4,999</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+                <!-- Product 10 -->
+                <div class="product-card">
+                    <img src="https://www.mytrendyphone.eu/images/MT04-Car-Bluetooth-Adapter-FM-Transmitter-HiFi-Music-MP3-Player-Type-C-plus-USB-Car-ChargerNone-25032024-00-p.webp" alt="Car Bluetooth Adapter">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Bluetooth Adapter</h3>
+                        <div class="product-price">₹799<span class="original-price">₹999</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+                <!-- Product 11 -->
+                <div class="product-card">
+                    <img src="https://images-cdn.ubuy.co.in/67ed8e3aaf9e39d3530dce57-auto-drive-1piece-car-steering-wheel.jpg" alt="Car Steering Wheel Cover">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Steering Wheel Cover</h3>
+                        <div class="product-price">₹599<span class="original-price">₹799</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+                <!-- Product 12 -->
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/71p9FLhJlEL.jpg" alt="Car Emergency Kit">
+                    <div class="product-info">
+                        <h3 class="product-title">Car Emergency Kit</h3>
+                        <div class="product-price">₹1,499<span class="original-price">₹2,789</span></div>
+                        <a href="/login/"><button class="add-to-cart">Add to Cart</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Code Alpha</h3>
+                <p>Your premier destination for automotive accessories and essentials. We bring you the best deals for your ride.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/home/">Home</a></li>
+                    <li><a href="/electronics/">Electronics</a></li>
+                    <li><a href="/clothing/">Clothing</a></li>
+                    <li><a href="/automotive/">Automotive</a></li>
+                    <li><a href="/accesories/">Accesories</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <a href="#" style="font-size: 1.5rem;">📘</a>
+                    <a href="#" style="font-size: 1.5rem;">📷</a>
+                    <a href="#" style="font-size: 1.5rem;">🐦</a>
+                    <a href="#" style="font-size: 1.5rem;">💼</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Code Alpha E-Commerce. All rights reserved. | Designed with ❤️ for auto lovers</p>
+        </div>
+    </footer>
+    <script>
+           // Show notification popup and redirect to login on OK
+        document.querySelectorAll('.add-to-cart').forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('Please login to add items to your cart.')) {
+                    window.location.href = '/login/';
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                header.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-box').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const searchTerm = this.value;
+                if (searchTerm.trim()) {
+                    alert(`Searching for: ${searchTerm}`);
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
