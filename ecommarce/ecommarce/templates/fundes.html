@@ -9,24 +9,26 @@
 <div id="page">
 
 <center>
-<h1>Support Our Cause</h1>
-<h3>Donate &#8377;100 For Charity</h3>		
 
-<form action={{paypalURL}} method="post">
+
+    <h1>Payment</h1>
+    <h3>Pay &#8377;{{ total|floatformat:2 }} to purchase your products.</h3>
+
+<form action="{{ paypalURL }}" method="post">
     <!-- Identify your business so that you can collect the payments. -->
-    <input type="hidden" name="business" value={{paypalID}}>
-    
+    <input type="hidden" name="business" value="{{ paypalID }}">
+
     <!-- Specify a Buy Now button. -->
     <input type="hidden" name="cmd" value="_xclick">
-    
+
     <!-- Specify details about the item that buyers will purchase. -->
     <input type="hidden" name="item_name" value="payment">
-    <input type="hidden" name="amount" value={{amt}}>
-    <input type="hidden" name="currency_code" value="USD">
-    
+    <input type="hidden" name="amount" value="{{ total|floatformat:2 }}">
+    <input type="hidden" name="currency_code" value="INR">
+
     <!-- Specify URLs -->
-    <input type="hidden" name="cancel_return" value=http://localhost:8000/cancel/>
-    <input type="hidden" name="return" value=http://localhost:8000/payment/?uid={{sunm}}&amt={{amt}}>
+    <input type="hidden" name="cancel_return" value="http://localhost:8000/cancel/">
+    <input type="hidden" name="return" value="http://localhost:8000/payment/?uid={{ sunm }}&amt={{ total|floatformat:2 }}">
     
     <!-- Display the payment button. -->
     <input type="image" name="submit" border="0"
@@ -39,3 +41,4 @@
 <br class="clearfix" />
 </div>
 <!-- page ends -->
+

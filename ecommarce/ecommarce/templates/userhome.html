@@ -14,36 +14,10 @@
     <!-- Header -->
 {% include "userheader.html" %}
     <!-- Welcome Banner -->
-    <div class="welcome-banner">
-        🎉 Welcome back! Discover amazing deals just for you! Get FREE delivery on orders above ₹999 🚚
-    </div>
-
+    
     <!-- Navigation Menu -->
-    <nav class="nav-menu">
-        <div class="nav-container">
-            <div class="nav-links">
-                <a href="/userhome/"><i class="fas fa-home"></i> Home</a>
-                <a href="/home_electronics/"><i class="fas fa-laptop"></i> Electronics</a>
-                <a href="/home_clothing/"><i class="fas fa-tshirt"></i> Fashion</a>
-                <a href="/home_books/"><i class="fas fa-book"></i> Books</a>
-                <a href="/home_games/"><i class="fas fa-gamepad"></i> Gaming</a>
-                <a href="/home_sports/"><i class="fas fa-dumbbell"></i> Sports</a>
-                <a href="/home_automotive/"><i class="fas fa-car"></i> Automotive</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Carousel -->
-    <section class="hero-carousel">
-        <div class="carousel-slide active">
-            <div class="slide-content">
-                <h2>MEGA SALE</h2>
-                <p>Up to 70% OFF on Electronics</p>
-                <a href="#products" class="cta-btn">Shop Now</a>
-            </div>
-        </div>
-    </section>
-
+    {% include "user_nev.html" %}
+   
     <!-- Categories Section -->
     <section class="section">
         <h2 class="section-title">Shop by Category</h2>

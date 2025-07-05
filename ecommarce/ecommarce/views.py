@@ -16,6 +16,8 @@ def electronics(request):
     return render(request, 'electronics.html')
 def accesories(request):
     return render(request, 'accesories.html')
+def home_accesories(request):
+    return render(request, 'home_accesories.html')
 
 def clothing(request):
     return render(request, 'clothing.html')
@@ -313,15 +315,17 @@ def checkout(request):
     return render(request, 'checkout.html', {'cart': cart, 'total': total})
 
 def fundes(request):
+    cart = request.session.get('cart', {})
+    total = sum(item['price'] * item['quantity'] for item in cart.values())
     paypalURL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
     paypalID = "sb-stbtx43008964@business.example.com"
-    amt = 100
     sunm = request.session.get("sunm", "")
     return render(request, "fundes.html", {
         "sunm": sunm,
         "paypalURL": paypalURL,
         "paypalID": paypalID,
-        "amt": amt
+        "total": total,
+        "cart": cart
     })
 
 def payment(request):
