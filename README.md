@@ -96,5 +96,7 @@ It helped me gain hands-on experience with Django, user authentication, and paym
 📧 Contact
 Nitin Sen
 📧 Email: nitinsen92650@gmail.com
-🔗 LinkedIn: linkedin.com/in/nitinsen001/
+🔗 LinkedIn: www.linkedin.com/in/
+nitin-sen-972a7130a
+
 
