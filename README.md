@@ -47,47 +47,7 @@ ecommerce_store/
 ├── static/               # CSS, JS, Images
 ├── manage.py
 └── requirements.txt
-⚙️ How to Run Locally
-Clone the Repository
 
-bash
-Copy
-Edit
-git clone https://github.com/your-username/ecommerce-store.git
-cd ecommerce-store
-Create Virtual Environment
-
-bash
-Copy
-Edit
-python -m venv venv
-venv\Scripts\activate  # On Windows
-Install Dependencies
-
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Run Migrations
-
-bash
-Copy
-Edit
-python manage.py migrate
-Start the Server
-
-bash
-Copy
-Edit
-python manage.py runserver
-Visit
-
-cpp
-Copy
-Edit
-http://127.0.0.1:8000/
-📷 Screenshots
-(Add relevant screenshots of your home page, product page, cart, and checkout here)
 
 🏆 Internship Acknowledgment
 This project was developed as a part of my 1-month Web Development Internship at Code Alpha.
