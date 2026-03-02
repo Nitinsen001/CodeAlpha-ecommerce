@@ -13,7 +13,7 @@
             "src": "ecommarce/build_files.sh",
             "use": "@vercel/static-build",
             "config": {
-                "distDir": "ecommarce/staticfiles_build"
+                "distDir": "staticfiles_build"
             }
         }
     ],
