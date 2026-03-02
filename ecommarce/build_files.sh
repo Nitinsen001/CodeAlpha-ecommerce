@@ -1,7 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Install Python dependencies
-pip install -r requirements.txt
+# Move into the Django project folder
+cd ecommarce
+
+# Install dependencies
+pip3 install -r requirements.txt
 
 # Collect static files
-python manage.py collectstatic --noinput
+python3 manage.py collectstatic --noinput

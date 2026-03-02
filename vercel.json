@@ -1,0 +1,30 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "ecommarce/ecommarce/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.12"
+            }
+        },
+        {
+            "src": "ecommarce/build_files.sh",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "ecommarce/staticfiles_build"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "ecommarce/ecommarce/wsgi.py"
+        }
+    ]
+}
