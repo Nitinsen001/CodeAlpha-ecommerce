@@ -14,6 +14,7 @@ def contact(request):
 
 def electronics(request):
     return render(request, 'electronics.html')
+
 def accesories(request):
     return render(request, 'accesories.html')
 def home_accesories(request):
