@@ -80,7 +80,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': '/tmp/db.sqlite3',   # writable on Vercel
-        'ATOMIC_REQUESTS': True,
     }
 }
 
@@ -124,9 +123,9 @@ MEDIA_ROOT = '/tmp/media/'
 # ──────────────────────────────────────────────────────────────
 # SESSIONS
 # ──────────────────────────────────────────────────────────────
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'   # DB sessions
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'  # no DB needed
 SESSION_SAVE_EVERY_REQUEST = True
-SESSION_COOKIE_AGE = 86400   # 24 hours
+SESSION_COOKIE_AGE = 86400  # 24 hours
 
 # ──────────────────────────────────────────────────────────────
 # MISC
