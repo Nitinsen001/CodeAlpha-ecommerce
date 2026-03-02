@@ -54,7 +54,7 @@ ROOT_URLCONF = 'ecommarce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'ecommarce' / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,8 +121,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'ecommarce' / 'static',
 ]
 
-# WhiteNoise storage for compressed static files
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# WhiteNoise storage (no manifest needed — avoids crash if staticfiles.json missing)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Media files
 MEDIA_URL = '/media/'
@@ -138,6 +138,9 @@ SITE_URL = os.environ.get('SITE_URL', 'http://127.0.0.1:8000')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_SAVE_EVERY_REQUEST = True
+
+# Use signed cookie sessions so no DB session table is needed on Vercel serverless
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
