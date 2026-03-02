@@ -44,6 +44,11 @@ urlpatterns = [
  path('verify', views.verify),  # without slash
 ]
 
+
+# Always serve media files (needed for product images on Vercel)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Serve static files in DEBUG mode only (WhiteNoise handles it in production)
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

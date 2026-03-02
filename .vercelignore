@@ -1,0 +1,26 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore local database
+ecommarce/db.sqlite3
+
+# Ignore collected static build (built fresh by build_files.sh)
+ecommarce/staticfiles_build/
+
+# Ignore media uploads
+ecommarce/media/
+
+# Ignore virtual environment
+env/
+venv/
+.env/
+.venv/
+
+# Ignore IDE
+.vscode/
+.idea/
+
+# Ignore logs
+*.log

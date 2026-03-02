@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# NOTE: Vercel runs this script from the ecommarce/ directory already
-# So NO cd needed
+# Vercel runs this script from ecommarce/ directory automatically
+# (src: "ecommarce/build_files.sh" means CWD = ecommarce/)
 
-# Install dependencies (--break-system-packages needed for Vercel's uv-managed Python)
+# Install Python dependencies
 pip3 install -r requirements.txt --break-system-packages
 
-# Collect static files
-python3 manage.py collectstatic --noinput
+# Collect static files into staticfiles_build/
+python3 manage.py collectstatic --noinput --clear
